@@ -1,0 +1,16 @@
+{% extends "wordgame/base.html" %}
+{% block content %}
+
+<form action='/wordgame/create/' method='post'>
+{% csrf_token %}
+    {% for field in form %}
+    <p>
+        {{ field.label_tag }}: {{ field }}
+        {{ field.errors }}
+    </p>
+    {% endfor %}
+    <p><input type='submit' value='Create' /></p>
+    <input type='hidden' name='next' value='{{ next }}' />
+</form>
+
+{% endblock %}

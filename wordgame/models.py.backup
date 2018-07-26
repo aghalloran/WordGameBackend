@@ -1,0 +1,37 @@
+from django.db import models
+from django.contrib.auth.models import User
+
+# Create your models here.
+class Guess(models.Model):
+    player = models.ForeignKey(User)
+    guess = models.CharField(max_length=75)
+    active = models.BooleanField()
+
+
+class Game(models.Model):
+    current_word = models.CharField(max_length=75)
+    guesses = models.ManyToManyField(Guess)
+    players = models.ManyToManyField(User)
+    total_rounds = models.IntegerField()
+    date_started = models.DateTimeField()
+    longest_streak = models.IntegerField()
+
+    def is_round_complete(self):
+        num_players = self.players.all().count()
+        num_guesses = self.guesses.all().count()
+
+        if num_guesses < num_players:
+            return False
+
+        return True
+
+    def calc_guess_submitted(self,username):
+        guess = self.guesses.all().filter(player__username=username)
+
+        if guess:
+            self.has_guessed = True
+        else:
+            self.has_guessed = False
+
+        return self.has_guessed
+

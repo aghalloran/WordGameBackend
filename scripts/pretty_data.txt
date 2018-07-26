@@ -1,0 +1,22 @@
+{
+    "date_started": "2012-08-10T07:24:05.776587", 
+    "game_uid": "0d891aeed14efa97be8f537abf1d97f0e8f9feed", 
+    "longest_streak": 0, 
+    "players": [
+        {
+            "resource_uri": "/wordgame/api/v1/players/1/", 
+            "username": "moe"
+        }, 
+        {
+            "resource_uri": "/wordgame/api/v1/players/2/", 
+            "username": "larry"
+        }, 
+        {
+            "resource_uri": "/wordgame/api/v1/players/3/", 
+            "username": "curly"
+        }
+    ], 
+    "round_number": 1, 
+    "states": [], 
+    "word": "sky"
+}

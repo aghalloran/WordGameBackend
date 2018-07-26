@@ -1,0 +1,6 @@
+{
+   "players": [
+        "/wordgame/api/v1/players/2/", 
+        "/wordgame/api/v1/players/3/" 
+    ] 
+}

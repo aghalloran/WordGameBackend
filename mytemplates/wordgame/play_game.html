@@ -1,0 +1,33 @@
+{% extends 'wordgame/base.html' %}
+{% block content %}
+
+{% if the_round.are_all_answers_submitted %}
+    <p>The round has completed. See all player responses below.</p>
+    {% for ps in the_round.playerroundstate_set.all %}
+        <p> {{ ps.player }}'s response: {{ the_round.word }} <i>{{ ps.answer }}</i> {% if ps.calc_points %}(+{{ ps.calc_points }}){% endif %}</p>
+    {% endfor %}
+
+<p><a href='{% url wordgame.views.prep_round round_id=the_round.id %}'>Play Again</a></p>
+
+{% elif not has_answer %}
+<p>Enter your first thought for the word!</p>
+<p>{{ the_round.word }}</p>
+<form action='' method='post'>
+{% csrf_token %}
+    {% for field in form %}
+    <p>
+        {{ field.label_tag }}: {{ field }}
+        {{ field.errors }}
+    </p>
+    {% endfor %}
+    <p><input type='submit' value='Submit' /></p>
+    <input type='hidden' name='next' value='{{ next }}' />
+</form>
+{% elif has_answer %}
+<p>You have already responded. Waiting for others to submit responses.</p>
+<p>Your response: {{ the_round.word }} <i> {{ the_answer }} </i></p>
+{% endif %}
+
+<p><a href='{% url wordgame.views.index %}'>Games</a></p>
+
+{% endblock %}

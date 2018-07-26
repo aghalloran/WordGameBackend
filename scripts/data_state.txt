@@ -1,0 +1,1 @@
+{"answer": "pig", "game_score": {"id": 7, "player_total": 0, "resource_uri": "/wordgame/api/v1/scores/7/"}, "has_seen_results": false, "id": 13, "is_round_active": true, "player": "/wordgame/api/v1/players/6/", "point_total": 0, "resource_uri": "/wordgame/api/v1/states/13/", "round": "/wordgame/api/v1/rounds/4/"}

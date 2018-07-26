@@ -1,0 +1,34 @@
+{% extends "wordgame/base.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+  <p>Welcome, {{ user.username }}. Get ready to play!</p>
+  {% url wordgame.views.create_game as creategame_url %}
+  <a href='{{ creategame_url }}'>Create Game</a>
+    {% for state in round_states %}
+      <p>Round: {{ state.round.round_number }}, Players: 
+      {% for ps in state.round.playerroundstate_set.all %}
+        {{ ps.player.username }}({{ ps.point_total }})
+      {% endfor %}
+      <a href='{% url wordgame.views.play_game playerroundstate_id=state.id %}'>
+      {% if state.round.are_all_answers_submitted %}
+        See Results
+      {% elif state.answer %}
+        See Results
+      {% elif not state.answer %}
+        Play
+      {% endif %}
+      </a>
+      </p>
+    {% endfor %}
+{% else %}
+  <p>Welcome! you'll need an account to play!</p>
+{% endif %}
+
+{% url django.contrib.auth.views.logout as the_url %}
+{% if the_url %}
+  <a href='{{ the_url }}'>Sign out</a>
+{% endif %}
+
+{% endblock %}
